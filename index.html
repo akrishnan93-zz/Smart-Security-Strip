@@ -1,0 +1,76 @@
+<!<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content = "width = 420, user-scalable=no" />
+
+    <title>WebIOPi | Raspberry Pi IoT Framework </title>
+
+    <script type = "text/javascript" src="/Webiopi.js"></script>
+
+    <script type="text/javascript">
+
+        webiopi().ready(function() {
+            var button1 = webiopi().createGIOButton(04,"On/Off");
+            var blinkButton = webiopi().createButton("blinkButton","Custon Blink",function() {
+                var count = [$("control1").val()];
+                webiopi().callMacro("blink", count);
+            });
+
+            $("#control2").append(blinkButton);
+            var button2 = webiopi.createButton("button2","Blink", function() {
+                webiopi().callMacro("blink", 4);
+            });
+            var button3 = webiopi.createButton("button3","Fast Blink", function() {
+                webiopi().callMacro("SOS");
+            });
+
+            $("#control1").append(button1);
+            $("#control2").append(button2);
+            $("#control3").append(button3);
+
+            webiopi.refreshGPIO(true);
+        });
+
+    </script>
+
+    <style type = "text/css">
+        button {
+            display:block;
+            margin: 40px 40px 40px 40px;
+            width: 160px;
+            height: 45px;
+            font-size: 24pt
+            font-weight: bold;
+            color: yellow;
+        }
+
+        gpio4.LOW {
+            background-color: Red;
+        }
+
+        gpio4.High {
+            background-color: Red;
+        }
+    </style>
+
+    </head>
+
+    <body>
+
+        <h1 style = "color:blue"> Power Strip Remote Control </h1>
+        <h3 style = "color:green"> By: Anand Krismam </h3>
+
+        <div id = "controls1" align = "left"> </div>
+        <div id = "controls2" align = "left"> </div>
+        <div id = "controls3" align = "left"> </div>
+
+        <div align = "left">
+
+        <p style = "color:purple;"><strong>Input Number of Blinks:</strong><<input type="text" align = "left" height = "200px" id = "control1"/></p>
+        <div id="control2"></div>
+        </div>
+
+    </body>
+
+</html>
